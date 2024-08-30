@@ -16,7 +16,7 @@ Este es un proyecto básico desarrollado para aprender y practicar React, espec�
 - Css
 - Biblioteca de confeti
 
-## Instalación
+## 🚀 Instalación
 
 1. Clona el repositorio.
 2. Navega al directorio del proyecto.

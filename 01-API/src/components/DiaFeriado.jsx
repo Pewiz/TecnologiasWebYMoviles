@@ -1,19 +1,6 @@
-import confetti from "canvas-confetti";
+import { ejecutarConfetti } from "../constantes";
 
 const DiaFeriado = ({ data, tipoFeriado, getRandomColor }) => {
-
-  const ejecutarConfetti = (event) => {
-    const { clientX: x, clientY: y } = event;
-    confetti({
-      particleCount: 100,
-      startVelocity: 30,
-      spread: 360,
-      origin: {
-        x: x / window.innerWidth,  // Normaliza la coordenada X o sea obtiene valores entre 0 y 1 para que los confettis no se salga de la ventana
-        y: y / window.innerHeight, // Normaliza la coordenada Y o sea obtiene valores entre 0 y 1 para que los confettis no se salga de la ventana
-      }
-    });
-  };
 
   return (
     data.map((element) => {

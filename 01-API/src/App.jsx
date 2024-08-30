@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import DiaFeriado from './components/DiaFeriado';
+import { getRandomColor } from './constantes';
 import './App.css';
 
 function App() {
@@ -21,13 +22,6 @@ function App() {
       .catch(err => console.error('error: ' + err));
   }, []);
 
-  function getRandomColor() {
-    const r = Math.floor(Math.random() * 256);
-    const g = Math.floor(Math.random() * 256);
-    const b = Math.floor(Math.random() * 256);
-    return `rgba(${r}, ${g}, ${b})`;
-  }
-
   
   return (
     <>
@@ -39,7 +33,7 @@ function App() {
     </section>
 
     <footer>
-        Creado por David Osorio
+        <address>Creado por David Osorio</address>
     </footer>
 
     </>

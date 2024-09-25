@@ -1,0 +1,71 @@
+.cart {
+  background: #000;
+  display: none;
+  padding: 32px;
+  position: fixed;
+  right: 0px;
+  top: 0px;
+  width: 200px;
+}
+
+.cart img {
+  aspect-ratio: 16/9;
+  width: 100%;
+}
+
+.cart li {
+  border-bottom: 1px solid #444;
+  padding-bottom: 16px;
+}
+
+.cart footer {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart footer button {
+  padding: 8px;
+}
+
+.cart-button {
+  align-items: center;
+  background: #ffab00;
+  border-radius: 25%;
+  cursor: pointer;
+  display: flex;
+  height: 39px;
+  justify-content: center;
+  padding: 4px;
+  position: fixed;
+  right: 8px;
+  top: 8px;
+  transition: all 0.3s ease;
+  width: auto;
+  z-index: 2;
+  font-size: 22px;
+  color: #000;
+}
+
+.cart-button:hover {
+  scale: 1.1;
+}
+
+.cart-button ~ input:checked ~ .cart {
+  height: 100%;
+  display: block;
+}
+
+.btnAdd{
+  background-color: green;
+}
+.btnDis{
+  background-color: rgb(141, 0, 0);
+}
+.btnDis:hover{
+  background-color: red;
+}
+.btnAdd:hover{
+  background-color: rgb(0, 255, 0);
+}

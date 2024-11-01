@@ -1,4 +1,4 @@
-# 🌐 TecnologiasWebYMoviles
+# 🌐 Tecnologias Web Y Moviles
 Este repositorio contiene varios proyectos desarrollados con **React**. Aquí se destacan algunos de ellos, incluyendo enlaces a las versiones desplegadas.
 
 ## 🚀 Proyectos

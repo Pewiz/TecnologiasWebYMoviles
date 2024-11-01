@@ -8,7 +8,7 @@ Consulta los feriados oficiales y nacionales. Este proyecto muestra las fechas d
 - **Enlace:** [Feriados](https://feriados.netlify.app/)
 
 ### 2. 🗂️ Malla Curricular - Ingeniería Civil Informática (2020)
-Este proyecto muestra la malla curricular de la carrera de Ingeniería Civil Informática del año 2020, permitiendo seleccionar cursos y gestionar sus prerrequisitos.
+Este proyecto muestra la malla curricular de la carrera de Ingeniería Civil Informática del año 2020.
 - **Enlace:** [Malla ICINF](https://malla-icinf.netlify.app/)
 
 

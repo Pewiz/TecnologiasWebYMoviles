@@ -18,6 +18,9 @@ const Malla = () => {
       setSelectedRamos(ramo);
     }
   };
+  const insertHyphen = (text) => {
+    return text.replace(/(Electromag)(netismo)/, "$1&shy;$2");
+  };
 
   const renderButton = (ramo) => {
     const isSelected = selectedRamos && selectedRamos.name === ramo.name;
@@ -35,7 +38,7 @@ const Malla = () => {
 
     return (
       <button key={ramo.name} className={buttonClass} onClick={() => handleClick(ramo)}>
-        {ramo.name}
+        <span dangerouslySetInnerHTML={{ __html: insertHyphen(ramo.name) }} />
       </button>
     );
   };

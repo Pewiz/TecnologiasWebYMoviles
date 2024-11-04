@@ -1,0 +1,54 @@
+.topBar{
+    background-color: #00275E;
+    display: flex;
+    color: white;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px;
+}
+.title {
+    text-transform: uppercase;
+}
+.btn-admision{
+    padding: 11px 5px;
+    background-color: #295494;
+    outline: 3px #295494 solid;
+    outline-offset: -3px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: 400ms;
+    width: 100px;
+    min-height: auto;
+}
+
+.btn-admision .text{
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    transition: 400ms;
+}
+
+.btn-admision:hover{
+    background-color: #FF4C00;
+    outline: 3px #FF4C00 solid;
+}
+
+
+.topBar a{
+    color: white;
+    font-size: 16px;
+}
+
+@media (max-width: 710px){
+    .topBar .title h1{
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 710px){
+    .topBar{
+        flex-direction: column;
+        gap: 10px;
+    }
+}

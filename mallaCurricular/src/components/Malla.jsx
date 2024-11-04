@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import './malla.css'; 
+import '../style/malla.css'; 
 
 const Malla = () => {
   const [ramos, setRamos] = useState([]);

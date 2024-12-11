@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./index.css";
 import Meme from "./Meme";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faInstagram } from '@fortawesome/free-brands-svg-icons'
 
 function App() {
   const [data, setData] = useState([]);
@@ -100,7 +102,7 @@ function App() {
 
   function Home() {
     return (
-      <div className="home">
+      <div className="absolute left-32 right-0 top-0 p-5 bg-slate-50 h-screen">
         <h2>Iniciar Sesión</h2>
         <input type="text" placeholder="Usuario" ref={userRef} />
         <input type="password" placeholder="Contraseña" ref={passwordRef} />
@@ -114,21 +116,20 @@ function App() {
   }
 
   function Memes() {
-    return <Meme data={data} />;
+    return (
+      <div className="absolute  top-0 p-5 bg-gray-50 left-32 right-0">
+      <Meme data={data}  />
+      </div>
+    )
   }
 
   return (
     <Router>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/memes">Memes</Link>
-          </li>
-        </ul>
-      </nav>
+      <img src="./assets/Threads-Logo" alt="" />
+      <div className="flex flex-col bg-white w-32 justify-center h-screen gap-10 items-center fixed ">
+        <Link to="/">Home</Link>
+        <Link to="/memes">Memes</Link>
+      </div>
 
       <Routes>
         <Route path="/" element={<Home />} />

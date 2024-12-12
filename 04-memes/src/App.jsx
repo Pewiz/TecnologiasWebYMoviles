@@ -143,8 +143,15 @@ function App() {
       if (!respuesta.ok) {
         return [null, "Error al subir meme"];
       }
-      console.log(respuesta);
-      return ["Meme subido con éxito!", null];
+      const urlMemes = `${urlBase}/memes/?sort_by=new&page=1&limit=10`;
+      const options = {
+        method: "GET",
+        headers: { accept: "application/json" },
+      };
+      const responseMemes = await fetch(urlMemes, options);
+      const newData = await responseMemes.json();
+
+      return [newData, null]; // Devolver los datos actualizados
     } catch (error) {
       return [null, error.message || "Error al subir meme"];
     }
@@ -237,7 +244,7 @@ function App() {
     ) : null;
   }
 
-  function SubirMeme() {
+  function SubirMeme({ onMemesUpdated }) {
     const { token } = useContext(AuthContext);
     const navigate = useNavigate();
     const tituloRef = useRef("");
@@ -251,11 +258,15 @@ function App() {
         descripcionRef.current.value,
         imagenRef.current.files[0]
       );
+
       if (error) {
         setMessage(error);
       } else {
-        setMessage(response);
+        setMessage("Meme subido correctamente");
         console.log(response);
+        if (onMemesUpdated) {
+          onMemesUpdated(response); // Actualiza los memes en el estado principal
+        }
         navigate("/");
       }
     };
@@ -281,6 +292,10 @@ function App() {
       </div>
     );
   }
+
+  const handleUpdateMemes = (newData) => {
+    setData(newData); // Actualiza los memes en el estado
+  };
 
   function Navegacion() {
     const [pathActual, setPathActual] = useState(window.location.pathname);
@@ -344,7 +359,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/user" element={<Usuario />} />
-          <Route path="/upload" element={<SubirMeme />} />
+          <Route
+            path="/upload"
+            element={<SubirMeme onMemesUpdated={handleUpdateMemes} />}
+          />
         </Routes>
       </Router>
     </AuthProvider>

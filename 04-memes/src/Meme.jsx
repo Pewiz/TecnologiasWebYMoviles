@@ -7,10 +7,13 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 const Meme = ({ data, actualizarLike }) => {
   const { token } = useContext(AuthContext);
   const [memes, setMemes] = useState(data);
+
+
   const handleLike = async (id) => {
     const [newData, error] = await actualizarLike(token, id);
     if (error) {
       console.error(error);
+      console.log("no pasa")
     } else {
       console.log(newData);
       // Actualizar el estado con los nuevos datos
@@ -24,11 +27,11 @@ const Meme = ({ data, actualizarLike }) => {
 
   const mapeoMeme = memes.map((element) => (
     <article className="flex justify-center mb-5" key={element.id}>
-      <div className="bg-white flex-col flex p-5  min-w-[500px] gap-2 border shadow-sm border-b-0 rounded-3xl">
+      <div className="bg-white flex-col flex p-5  w-[500px] gap-2 border shadow-sm border-b-0 rounded-3xl">
         <h3 className="font-bold">{element.user}</h3>
-        <h1 className="italic text-sm">{element.title}</h1>
-        <p className="text-sm">{element.description}</p>
-        <div className="flex justify-center">
+        <h1 className="italic text-sm w-[450px]">{element.title}</h1>
+        <p className="text-sm w-[450px] ">{element.description}</p>
+        <div className="flex justify-center ">
           <img className="w-96 rounded-xl" src={element.img_url} alt="" />
         </div>
         <div className="flex gap-1">
@@ -43,8 +46,8 @@ const Meme = ({ data, actualizarLike }) => {
 
   return (
     <>
-      <div className="fixed left-32 bg-gray-50 w-[90%] z-10 top-0 text-center h-16">
-        <h1 className="mb-10 text-lg leading-loose ">Home</h1>
+      <div className="fixed left-16 bg-gray-50 w-[95%] z-10 top-0 text-center h-16 mb-10">
+        <h1 className=" text-lg leading-loose ">Home</h1>
       </div>
       <div className="mt-16">{mapeoMeme}</div>
     </>

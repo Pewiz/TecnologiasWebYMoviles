@@ -10,7 +10,7 @@ import {
 import "./index.css";
 import Meme from "./Meme";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse, faUser, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faHouse, faUser, faPlus, faStar, faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   const [data, setData] = useState([]);
@@ -18,16 +18,19 @@ function App() {
   const passwordRef = useRef("");
   const [message, setMessage] = useState("");
   const urlBase = "https://memes-api.grye.org";
+  const [sortBy, setSortBy] = useState("new");
+  
 
   useEffect(() => {
-    const url = `${urlBase}/memes/?sort_by=new&page=1&limit=10`;
+    const url = `${urlBase}/memes/?sort_by=${sortBy}&page=1&limit=10`;
     const options = { method: "GET", headers: { accept: "application/json" } };
-
+  
     fetch(url, options)
       .then((res) => res.json())
       .then((json) => setData(json))
-      .catch((err) => console.error("error: " + err));
-  }, []);
+      .catch((err) => console.error("Error al obtener memes: ", err));
+  }, [sortBy]); 
+  
 
   const autenticar = async (usuario, contraceña) => {
     try {
@@ -124,9 +127,7 @@ function App() {
         return [null, "Debes iniciar sesión para subir un meme."];
       }
 
-      const url = `${urlBase}/memes/?title=${encodeURIComponent(
-        titulo
-      )}&description=${encodeURIComponent(descripcion)}`;
+      const url = `${urlBase}/memes/?title=${titulo}&description=${descripcion}`;
 
       const dataFormulario = new FormData();
       dataFormulario.append("file", imagen);
@@ -177,24 +178,52 @@ function App() {
     };
 
     return (
-      <div className="absolute left-16 right-0 top-0 p-5 bg-slate-50 h-screen">
-        <h2>Iniciar Sesión</h2>
-        <input type="text" placeholder="Usuario" ref={userRef} />
-        <input type="password" placeholder="Contraseña" ref={passwordRef} />
-        <button className="m-6" onClick={handleLogin}>
-          Iniciar Sesión
-        </button>
-        <Link to="/register">
-          <button>Registrarse</button>
-        </Link>
-        {message && <p>{message}</p>}
+      <>
+      <img className="absolute  right-0 w-[98%] object-cover overflow-hidden top-[-56px] " src="https://static.cdninstagram.com/rsrc.php/y0/r/THmkXhzz2_a.avif" alt="" />
+      <div className="absolute left-16 right-0 top-0 p-5 h-full ">
+        <div className="flex flex-col justify-center items-center h-full gap-8">
+          <div className="  h-[600px] w-[500px] rounded-3xl p-14 flex flex-col gap-5 justify-center text-center items-center">
+            <h2 className="text-2xl font-bold  mb-9">Iniciar Sesión</h2>
+            <input className="rounded-lg p-2 w-72 bg-[#F5F5F5] " type="text" placeholder="Usuario" ref={userRef} />
+            <input className="rounded-lg p-2 w-72 bg-[#F5F5F5]" type="password" placeholder="Contraseña" ref={passwordRef} />
+            <button className="m-6 bg-black p-5 rounded-full text-white text-xl w-56" onClick={handleLogin}>
+              Iniciar Sesión
+            </button>
+          </div>
+            <div className="flex gap-2 ">
+              <p>Nuevo?</p>
+              <Link to="/register">
+                <button className=" font-bold ">Registrarse</button>
+              </Link>
+            </div>
+        </div>
       </div>
+      </>
     );
   }
 
+  function SortSelector({ setSortBy }) {
+    return (
+      <div className="flex flex-col justify-center gap-4 ml-10  mt-8 h-20 fixed">
+        <button
+          className="p-2 "
+          onClick={() => setSortBy("top")}
+        >
+          <FontAwesomeIcon icon={faStar} size="xl" style={{color: "#000000",}} />
+        </button>
+        <button
+          className="p-2 "
+          onClick={() => setSortBy("new")}
+        >
+         <FontAwesomeIcon icon={faClockRotateLeft} size="xl" style={{color: "#000000",}} />
+        </button>
+      </div>
+    );
+  }
+  
+
   function Register() {
     const navigate = useNavigate();
-
     const handleRegister = async () => {
       const [response, error] = await registrar(
         userRef.current.value,
@@ -210,15 +239,27 @@ function App() {
     };
 
     return (
-      <div className="absolute left-16 right-0 top-0 p-5 bg-slate-50 h-screen">
-        <h2>Registrar</h2>
-        <input type="text" placeholder="Usuario" ref={userRef} />
-        <input type="password" placeholder="Contraseña" ref={passwordRef} />
-        <button className="m-6" onClick={handleRegister}>
-          Registrar
-        </button>
-        {message && <p>{message}</p>}
+      <>
+      <img className="absolute  right-0 w-[98%] object-cover overflow-hidden top-[-56px]" src="https://static.cdninstagram.com/rsrc.php/y0/r/THmkXhzz2_a.avif" alt="" />
+      <div className="absolute left-16 right-0 top-0  p-5 h-full ">
+        <div className="flex flex-col justify-center items-center h-full gap-8">
+          <div className="  h-[600px] w-[500px] rounded-3xl p-14 flex flex-col gap-5 justify-center text-center items-center">
+            <h2 className="text-2xl font-bold  mb-9">Registrarse</h2>
+            <input className="rounded-lg p-2 w-72 bg-[#F5F5F5] " type="text" placeholder="Usuario" ref={userRef} />
+            <input className="rounded-lg p-2 w-72 bg-[#F5F5F5] " type="password" placeholder="Contraseña" ref={passwordRef} />
+            <button className="m-6 bg-black p-5 rounded-full text-white text-xl w-56" onClick={handleRegister}>
+              Registrarse
+            </button>
+          </div>
+            <div className="flex gap-2 ">
+              <p>Ya tienes cuenta?</p>
+              <Link to="/login">
+                <button className=" font-bold ">Iniciar sesion</button>
+              </Link>
+            </div>
+        </div>
       </div>
+      </>
     );
   }
 
@@ -238,11 +279,17 @@ function App() {
 
     return token ? (
       <div className="absolute left-16 right-0 top-0 p-5 bg-slate-50 h-screen">
-        <h2>Bienvenido, {user}</h2>
-        <button onClick={handleLogout}>Cerrar Sesión</button>
+        <div className="flex flex-col items-center justify-center h-full">
+          <img className="rounded-full w-60 h-60 object-cover mb-5 shadow-xl " src="https://res.cloudinary.com/doq82xcpd/image/upload/v1727659206/samples/animals/three-dogs.jpg" alt="" />
+          <h2>Bienvenido, {user}</h2>
+          <button className="font-bold" onClick={handleLogout}>Cerrar Sesión</button>
+        </div>
       </div>
     ) : null;
   }
+
+
+
 
   function SubirMeme({ onMemesUpdated }) {
     const { token } = useContext(AuthContext);
@@ -250,6 +297,7 @@ function App() {
     const tituloRef = useRef("");
     const descripcionRef = useRef("");
     const imagenRef = useRef("");
+    
 
     const handleUpload = async () => {
       const [response, error] = await subirMeme(
@@ -263,7 +311,6 @@ function App() {
         setMessage(error);
       } else {
         setMessage("Meme subido correctamente");
-        console.log(response);
         if (onMemesUpdated) {
           onMemesUpdated(response); // Actualiza los memes en el estado principal
         }
@@ -272,23 +319,35 @@ function App() {
     };
 
     return (
-      <div className="absolute left-16 right-0 top-0 p-5 bg-slate-50 h-screen">
-        <h2>Subir Meme</h2>
-        <input type="text" placeholder="Título" ref={tituloRef} />
-        <input type="text" placeholder="Descripción" ref={descripcionRef} />
-        <input type="file" ref={imagenRef} />
-        <button className="m-6" onClick={handleUpload}>
-          Subir Meme
-        </button>
-        {message && <p>{message}</p>}
-      </div>
+      <>
+      <img className=" w-full object-cover h-full absolute z-[-1]" src="https://res.cloudinary.com/doq82xcpd/image/upload/v1734030711/ll6i7sq0pc8neetax59s.png" alt="" />
+        <div className="absolute left-16 right-0 top-0  p-5 h-full ">
+          <div className="flex flex-col justify-center items-center h-full gap-8">
+            <div className="  h-[600px] w-[500px] rounded-3xl p-14 flex flex-col gap-5 justify-center text-center items-center">
+              <h2 className="text-2xl font-bold  mb-9">Subir Meme</h2>
+              <input className="rounded-lg p-2 w-72 bg-[#F5F5F5] " type="text" placeholder="Titulo" ref={tituloRef} />
+              <input className="rounded-lg p-2 w-72 bg-[#F5F5F5] " type="text" placeholder="Descripción" ref={descripcionRef} />
+              <input type="file" ref={imagenRef} />
+              <button className="m-6 bg-black p-5 rounded-full text-white text-xl w-56" onClick={handleUpload}>
+                Subir
+              </button>
+              {message && <p>{message}</p>}
+            </div>
+          </div>
+        </div>
+      </>
     );
   }
 
   function Memes({ data, actualizarLike }) {
     return (
       <div className="absolute top-0 p-5 bg-gray-50 left-16 right-0 ">
-        <Meme data={data} actualizarLike={actualizarLike} />
+        <div>
+          <Meme data={data} actualizarLike={actualizarLike} />
+          <div className="absolute right-48 z-20 top-20">
+          <SortSelector setSortBy={setSortBy} />
+          </div>
+        </div>
       </div>
     );
   }

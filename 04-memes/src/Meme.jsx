@@ -1,21 +1,54 @@
 /* eslint-disable react/prop-types */
-const Meme = ({ data }) => {
-  if (!data) {
+import { useContext, useState } from "react";
+import { AuthContext } from "./AuthProvider";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+
+const Meme = ({ data, actualizarLike }) => {
+  const { token } = useContext(AuthContext);
+  const [memes, setMemes] = useState(data);
+  const handleLike = async (id) => {
+    const [newData, error] = await actualizarLike(token, id);
+    if (error) {
+      console.error(error);
+    } else {
+      console.log(newData);
+      // Actualizar el estado con los nuevos datos
+      setMemes(newData);
+    }
+  };
+
+  if (!memes || memes.length === 0) {
     return <p>No hay memes disponibles</p>;
   }
 
-  return data.map((element) => {
-    return (
-      <article className="flex justify-center" key={element.id}>
-        <div className="bg-white flex-col flex p-5 w-96 gap-2 border border-3">
-          <h1>{element.title}</h1>
-          <p>{element.descripcion}</p>
-          <img className="w-80 rounded-xl" src={element.img_url} alt="" />
-          <p>👍{element.likes}</p>
-          <p>Subido por: {element.user}</p>
+  const mapeoMeme = memes.map((element) => (
+    <article className="flex justify-center mb-5" key={element.id}>
+      <div className="bg-white flex-col flex p-5  min-w-[500px] gap-2 border shadow-sm border-b-0 rounded-3xl">
+        <h3 className="font-bold">{element.user}</h3>
+        <h1 className="italic text-sm">{element.title}</h1>
+        <p className="text-sm">{element.description}</p>
+        <div className="flex justify-center">
+          <img className="w-96 rounded-xl" src={element.img_url} alt="" />
         </div>
-      </article>
-    );
-  });
+        <div className="flex gap-1">
+          <button onClick={() => handleLike(element._id)}>
+            <FontAwesomeIcon icon={faHeart} style={{ color: "#ff0000" }} />
+          </button>
+          <h5>{element.likes}</h5>
+        </div>
+      </div>
+    </article>
+  ));
+
+  return (
+    <>
+      <div className="fixed left-32 bg-gray-50 w-[90%] z-10 top-0 text-center h-16">
+        <h1 className="mb-10 text-lg leading-loose ">Home</h1>
+      </div>
+      <div className="mt-16">{mapeoMeme}</div>
+    </>
+  );
 };
+
 export default Meme;

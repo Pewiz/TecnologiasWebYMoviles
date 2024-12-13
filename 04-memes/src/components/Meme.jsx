@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useContext, useState } from "react";
-import { AuthContext } from "./AuthProvider";
+import { AuthContext } from "../context/AuthProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
@@ -8,12 +8,11 @@ const Meme = ({ data, actualizarLike }) => {
   const { token } = useContext(AuthContext);
   const [memes, setMemes] = useState(data);
 
-
   const handleLike = async (id) => {
     const [newData, error] = await actualizarLike(token, id);
     if (error) {
       console.error(error);
-      console.log("no pasa")
+      console.log("no pasa");
     } else {
       console.log(newData);
       // Actualizar el estado con los nuevos datos

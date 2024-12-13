@@ -14,10 +14,8 @@ const Register = () => {
       passwordRef.current.value
     );
     if (error) {
-      // setMessage(error);
       console.log(error);
     } else {
-      //setMessage("Se registró correctamente");
       console.log("Usuario:", response);
       navigate("/login"); // Redirige a la página de login después del registro
     }

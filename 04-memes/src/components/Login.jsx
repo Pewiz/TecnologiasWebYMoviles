@@ -9,7 +9,6 @@ const Login = () => {
   const navigate = useNavigate();
   const userRef = useRef("");
   const passwordRef = useRef("");
-  //const [message, setMessage] = useState("");
 
   const handleLogin = async () => {
     const [response, error] = await autenticar(
@@ -17,13 +16,10 @@ const Login = () => {
       passwordRef.current.value
     );
     if (error) {
-      //setMessage(error);
       console.log(error);
     } else {
-      //setMessage("Inicio sesión correctamente");
-      login(response.access_token); // Actualizar el token de autenticación
+      login(response.access_token); // Actualizamos el token de autenticación
       navigate("/user");
-      console.log(response.access_token);
     }
   };
 

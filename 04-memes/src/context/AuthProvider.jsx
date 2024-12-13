@@ -11,7 +11,7 @@ const AuthProvider = ({ children }) => {
     if (token) {
       localStorage.setItem("token", token);
       const decodedToken = jwtDecode(token);
-      setUser(decodedToken.sub); // Ajusta "sub" según la estructura de tu token
+      setUser(decodedToken.sub);
     } else {
       localStorage.removeItem("token");
       setUser(null);
@@ -27,6 +27,7 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
+    //No se si utilizar useMemo, no se muy bien como funciona, pero fue una recomendacion que me dio el linter
     <AuthContext.Provider value={{ token, user, login, logout }}>
       {children}
     </AuthContext.Provider>

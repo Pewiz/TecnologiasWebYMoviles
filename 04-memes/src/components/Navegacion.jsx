@@ -20,11 +20,13 @@ const Navegacion = () => {
 
   return (
     <div className="flex flex-col items-center fixed w-16 bg-gray-50">
-      <img
-        src="https://res.cloudinary.com/doq82xcpd/image/upload/v1733983731/Threads__app__logo.svg_q9uc8m.png"
-        alt=""
-        className="w-10 mt-10"
-      />
+      <Link to="/" onClick={() => setPathActual("/")}>
+        <img
+          src="https://res.cloudinary.com/doq82xcpd/image/upload/v1733983731/Threads__app__logo.svg_q9uc8m.png"
+          alt=""
+          className="w-10 mt-10"
+        />
+      </Link>
       <div className="flex flex-col justify-center h-screen gap-10 items-center  ">
         <Link to="/" onClick={() => setPathActual("/")}>
           <FontAwesomeIcon

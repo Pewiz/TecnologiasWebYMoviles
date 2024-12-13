@@ -23,7 +23,7 @@ const Usuario = () => {
       <div className="flex flex-col items-center justify-center h-full">
         <img
           className="rounded-full w-60 h-60 object-cover mb-5 shadow-xl "
-          src="https://res.cloudinary.com/doq82xcpd/image/upload/v1727659206/samples/animals/three-dogs.jpg"
+          src="https://res.cloudinary.com/doq82xcpd/image/upload/v1734053825/uczz3fjrqmlrw3azmofl.jpg"
           alt=""
         />
         <h2>Bienvenido, {user}</h2>
